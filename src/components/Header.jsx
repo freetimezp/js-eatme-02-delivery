@@ -1,18 +1,31 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { app } from '../firebase.config';
 
 import Logo from '../img/logo.png';
 import Avatar from '../img/avatar.png';
 import { MdShoppingBasket } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
+  const firebaseAuth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
+  const login = async () => {
+    const response = await signInWithPopup(firebaseAuth, provider);
+    console.log(response);
+  }
+
   return (
     <header className="fixed z-50 w-screen p-6 px-16">
       {/* deactop & tanlet */}
       <div className="hidden md:flex h-full w-full items-center justify-between">
-        <div className="flex items-center gap-2">
+        <Link to={'/'} className="flex items-center gap-2">
           <img src={Logo} className="w-8 object-cover" alt="logo" />
           <p className="text-headingColor text-xl font-bold"> EatMe</p>
-        </div>
+        </Link>
 
         <div className="flex items-center gap-8">
           <ul className="flex items-center gap-8">
@@ -33,7 +46,15 @@ const Header = () => {
             </div>
           </div>
 
-          <img className="w-10 h-10 shadow-2xl cursor-pointer min-w-[40px] min-h-[40px]" src={Avatar} alt="user profile" />
+          <div className="relative">
+            <motion.img
+              whileTap={{ scale: 0.6 }} 
+              className="w-10 h-10 shadow-2xl cursor-pointer min-w-[40px] min-h-[40px]" 
+              src={Avatar} 
+              alt="user profile"
+              onClick={login} 
+            />
+          </div>
         </div>
       </div>
 
