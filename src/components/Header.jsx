@@ -20,13 +20,14 @@ const Header = () => {
   const login = async () => {
     if(!user) {
       const { user: { refreshToken, providerData } } = await signInWithPopup(firebaseAuth, provider);
-    
+
       dispatch({
         type: actionType.SET_USER,
         user: providerData[0]
       });
   
       localStorage.setItem('user', JSON.stringify(providerData[0]));
+      console.log(user);
     }else{
       setIsMenu(!isMenu);
     }
@@ -43,7 +44,7 @@ const Header = () => {
 
   return (
     <header className="fixed z-50 w-screen p-3 md:p-6 px-4 md:px-16 bg-primary shadow-blue-100 shadow-lg">
-      {/* deactop & tanlet */}
+      {/* desctop & tablet */}
       <div className="hidden md:flex h-full w-full items-center justify-between">
         <Link to={'/'} className="flex items-center gap-2">
           <img src={Logo} className="w-8 object-cover" alt="logo" />
@@ -76,7 +77,7 @@ const Header = () => {
             <motion.img
               whileTap={{ scale: 0.6 }} 
               className="w-10 h-10 shadow-2xl cursor-pointer min-w-[40px] min-h-[40px] rounded-full" 
-              src={user ? user.photoURL : Avatar} 
+              src={user ? user?.photoURL : Avatar} 
               alt="user profile"
               onClick={login} 
             />
@@ -89,7 +90,7 @@ const Header = () => {
                 {user && user.email === 'fromzpcity@gmail.com' && (
                   <Link to={'/createItem'}>
                     <p className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-200 transition-all
-                      duration-100 ease-in-out text-textColor text-base">
+                      duration-100 ease-in-out text-textColor text-base" onClick={() => setIsMenu(false)}>
                       New Item <MdAdd />
                     </p>
                   </Link>
@@ -136,9 +137,12 @@ const Header = () => {
               className="w-40 bg-gray-50 shadow-xl rounded-lg absolute flex flex-col top-12 right-0"
             >
               {user && user.email === 'fromzpcity@gmail.com' && (
-                <Link to={'/createItem'}>
-                  <p className="px-6 py-3 flex items-center gap-3 cursor-pointer hover:bg-slate-200 transition-all
-                    duration-100 ease-in-out text-textColor text-base">
+                <Link to={"/createItem"}>
+                  <p 
+                    className="px-6 py-3 flex items-center gap-3 cursor-pointer hover:bg-slate-200 transition-all
+                    duration-100 ease-in-out text-textColor text-base" 
+                    onClick={() => setIsMenu(false)}
+                  >
                     New Item <MdAdd />
                   </p>
                 </Link>
@@ -146,13 +150,21 @@ const Header = () => {
 
               <ul className="flex flex-col">
                 <li className="text-base text-textColor hover:text-headingColor duration-100 transition-all
-                  ease-in-out cursor-pointer px-6 py-3 hover:bg-slate-200">Home</li>
+                  ease-in-out cursor-pointer px-6 py-3 hover:bg-slate-200" onClick={() => setIsMenu(false)}>
+                  Home
+                </li>
                 <li className="text-base text-textColor hover:text-headingColor duration-100 transition-all
-                  ease-in-out cursor-pointer px-6 py-3 hover:bg-slate-200">Menu</li>
+                  ease-in-out cursor-pointer px-6 py-3 hover:bg-slate-200" onClick={() => setIsMenu(false)}>
+                  Menu
+                </li>
                 <li className="text-base text-textColor hover:text-headingColor duration-100 transition-all
-                  ease-in-out cursor-pointer px-6 py-3 hover:bg-slate-200">About Us</li>
+                  ease-in-out cursor-pointer px-6 py-3 hover:bg-slate-200" onClick={() => setIsMenu(false)}>
+                  About Us
+                </li>
                 <li className="text-base text-textColor hover:text-headingColor duration-100 transition-all
-                  ease-in-out cursor-pointer px-6 py-3 hover:bg-slate-200">Service</li>
+                  ease-in-out cursor-pointer px-6 py-3 hover:bg-slate-200" onClick={() => setIsMenu(false)}>
+                  Service
+                </li>
               </ul>
 
               <p 
