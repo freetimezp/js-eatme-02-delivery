@@ -8,6 +8,11 @@ import { categories } from '../utils/data';
 import Loader from './Loader';
 import { saveItem } from '../utils/firebaseFunctions';
 
+import { useStateValue } from '../context/StateProvider';
+import { getAllFoodItems } from '../utils/firebaseFunctions';
+import { actionType } from '../context/reducer';
+
+
 const CreateContainer = () => {
   const [title, setTitle] = useState("");
   const [calories, setCalories] = useState("");
@@ -18,6 +23,8 @@ const CreateContainer = () => {
   const [msg, setMsg] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [imageAsset, setImageAsset] = useState(null);
+  const [{}, dispatch] = useStateValue();
+
 
   const uploadImage = (e) => {
     setIsLoading(true);
@@ -105,6 +112,8 @@ const CreateContainer = () => {
         setTimeout(() => {
           setFields(false);
         }, 4000);
+
+        fetchData();
       }
     } catch(error) {
       //console.log(error);
@@ -125,6 +134,16 @@ const CreateContainer = () => {
     setPrice('');
     setCategory(null);
   };
+
+  const fetchData = async () => {
+    await getAllFoodItems().then((data) => {
+      //console.log(data);
+      dispatch({
+        type: actionType.SET_FOOD_ITEMS,
+        foodItems: data,
+      });
+    });
+  }
 
   return (
     <div className="w-full min-h-[calc(100vh-128px)] flex items-center justify-center">
