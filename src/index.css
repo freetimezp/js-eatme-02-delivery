@@ -21,3 +21,14 @@ body {
   overflow-x: hidden;
 }
 
+.swiper-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.swiper-slide {
+  max-width: 340px;
+}
+
+
+

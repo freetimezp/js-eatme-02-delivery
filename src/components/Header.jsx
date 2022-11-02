@@ -27,7 +27,7 @@ const Header = () => {
       });
   
       localStorage.setItem('user', JSON.stringify(providerData[0]));
-      //console.log(user);
+      console.log(user);
     }else{
       setIsMenu(!isMenu);
     }
@@ -78,7 +78,7 @@ const Header = () => {
               whileTap={{ scale: 0.6 }} 
               className="w-10 h-10 shadow-2xl cursor-pointer min-w-[40px] min-h-[40px] rounded-full" 
               src={user ? user?.photoURL : Avatar} 
-              alt="user profile"
+              alt="user"
               onClick={login} 
             />
 
@@ -87,7 +87,7 @@ const Header = () => {
                 initial={{ opacity: 0, scale: 0.6 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.6 }}
                 className="w-40 bg-gray-50 shadow-xl rounded-lg absolute flex flex-col top-12 right-0"
               >
-                {user && user.email === 'fromzpcity@gmail.com' && (
+                {user && user?.email === 'fromzpcity@gmail.com' && (
                   <Link to={'/createItem'}>
                     <p className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-200 transition-all
                       duration-100 ease-in-out text-textColor text-base" onClick={() => setIsMenu(false)}>
@@ -126,8 +126,8 @@ const Header = () => {
           <motion.img
             whileTap={{ scale: 0.6 }} 
             className="w-10 h-10 shadow-2xl cursor-pointer min-w-[40px] min-h-[40px] rounded-full" 
-            src={user ? user.photoURL : Avatar} 
-            alt="user profile"
+            src={user ? user?.photoURL : Avatar} 
+            alt="user"
             onClick={login} 
           />
 
