@@ -40,15 +40,15 @@ const RowContainer = ({ flag, data }) => {
       <div>
         {data && data?.map((item) => (
           <SwiperSlide
-            key={item.id} 
+            key={item?.id} 
             className="w-screen m-auto h-auto bg-orange-400 rounded-lg p-2 px-3 hover:shadow-lg duration-300 my-12
             hover:bg-orange-500 md:mx-4"
           >
             <div className="flex items-center justify-between">
               <motion.img 
                 whileHover={{ scale: 1.2 }}
-                src={item.imageURL} 
-                alt=""
+                src={item?.imageURL} 
+                alt="fruit"
                 className="w-40 max-w-40 h-40 max-h-40 -mt-10 rounded-md hover:rounded-none" 
               />
               <motion.div
@@ -61,12 +61,12 @@ const RowContainer = ({ flag, data }) => {
         
             <div className="w-full flex flex-col items-end justify-end">
               <p className="text-textColor font-semibold text-base md:text-lg">
-                Chocolate & Vanilla  
+                {item?.title}  
               </p> 
-              <p className="mt-1 text-sm italic text-gray-700">45 calories</p>
+              <p className="mt-1 text-sm italic text-gray-700">{item?.calories} calories</p>
               <div className="flex items-center gap-8">
                 <p className="text-lg text-headingColor font-semibold">
-                  <span className="text-sm text-red-500">$</span> 5.25
+                  <span className="text-sm text-red-700">$</span> {item?.price}
                 </p>
               </div>
             </div>
