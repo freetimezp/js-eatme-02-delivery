@@ -7,17 +7,18 @@ import NotFound from '../img/NotFound.svg';
 const ItemsContainer = ({ data }) => {
 
   return (
-    <div className="w-full gap-1 md:gap-3 py-12 bg-rowBg flex flex-wrap items-center justify-center">
+    <div className="w-full gap-0 md:gap-3 py-12 bg-rowBg flex flex-wrap items-center justify-center">
         {(data && data?.length > 0) ? data?.map((item) => (
           <div key={item?.id} 
-            className="w-225 m-auto h-auto bg-blue-200 rounded-lg p-2 px-3 hover:shadow-lg duration-300 my-12
-            hover:bg-blue-300 md:mx-4">
-            <div className="flex items-center justify-between">
+            className="w-300 h-[160px] md:w-225 md:h-[140px] m-auto bg-blue-200 rounded-lg p-2 px-3 hover:shadow-lg 
+            duration-300 my-12 hover:bg-blue-300 md:mx-4 flex flex-col justify-between">
+            <div className="flex items-center justify-between pl-2 md:pl-0">
               <motion.img 
                 whileHover={{ scale: 1.2 }}
                 src={item?.imageURL} 
                 alt="fruit"
-                className="w-20 max-w-20 h-20 max-h-20 -mt-10 rounded-md hover:rounded-none" 
+                className="w-[100px] md:w-20 max-w-[100px] md:max-w-20 h-[100px] md:h-20 max-h-[100px] md:max-h-20 
+                -mt-10 rounded-md hover:rounded-none hover:scale-125 transition-all duration-300" 
               />
               <motion.div
                 whileTap={{ scale: 0.75 }} 
