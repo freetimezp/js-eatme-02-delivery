@@ -24,10 +24,7 @@ const MainContainer = () => {
           </p>
         </div>
 
-        <RowContainer
-          flag={true} 
-          data={foodItems?.filter((n) => n.category === 'fruits')} 
-        />
+        <RowContainer flag={false} data={foodItems?.filter((n) => n.category === 'fruits')} />
       </section>
 
       <MenuContainer />
