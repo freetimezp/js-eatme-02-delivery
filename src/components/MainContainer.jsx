@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import HomeContainer from './HomeContainer';
-import { motion } from 'framer-motion';
 
 import RowContainer from './RowContainer';
 import { useStateValue } from '../context/StateProvider';

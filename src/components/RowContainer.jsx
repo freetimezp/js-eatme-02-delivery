@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 
 import { MdShoppingBasket } from 'react-icons/md';
 import { motion } from 'framer-motion';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import SwiperCore, { Navigation } from 'swiper';
 
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 
@@ -16,29 +16,40 @@ const RowContainer = ({ flag, data }) => {
 
   return (
     <Swiper
+      breakpoints={{
+        420: {
+          slidesPerView: 1,
+          width: 300,
+        },
+        800: {
+          slidesPerView: 2,
+          width: 680,
+        }
+      }}
       navigation={{
         nextEl: nextRef.current,
         prevEl: prevRef.current,
       }}
-      spaceBetween={20}
-      slidesPerView={4}
       loop={true}
-      className={`w-full gap-3 py-12 bg-rowBg overflow-x-hidden mySwiper
-      ${flag ? "scrollbar-none" : "flex-wrap"}`}
+      slidesPerView={4}
+      width={1320}
+      grabCursor={true}
+      spaceBetween={10}
+      className="w-full gap-1 md:gap-3 py-12 bg-rowBg mySwiper flex flex-row relative scroll-smooth"
     >
       <div>
         {data && data?.map((item) => (
           <SwiperSlide
             key={item.id} 
-            className="w-300 md:w-340 h-auto bg-blue-50 rounded-lg p-2 backdrop-blur-md my-12 hover:shadow-lg duration-300
-            hover:bg-blue-100 min-w-[300px] md:min-w-[340px]"
+            className="w-screen m-auto h-auto bg-orange-400 rounded-lg p-2 px-3 hover:shadow-lg duration-300 my-12
+            hover:bg-orange-500 md:mx-4"
           >
-            <div className="w-full flex items-center justify-between">
+            <div className="flex items-center justify-between">
               <motion.img 
                 whileHover={{ scale: 1.2 }}
                 src={item.imageURL} 
                 alt=""
-                className="w-40 max-w-40 max-h-40 -mt-8 rounded-md hover:rounded-none" 
+                className="w-40 max-w-40 h-40 max-h-40 -mt-10 rounded-md hover:rounded-none" 
               />
               <motion.div
                 whileTap={{ scale: 0.75 }} 
@@ -52,7 +63,7 @@ const RowContainer = ({ flag, data }) => {
               <p className="text-textColor font-semibold text-base md:text-lg">
                 Chocolate & Vanilla  
               </p> 
-              <p className="mt-1 text-sm text-gray-500">45 calories</p>
+              <p className="mt-1 text-sm italic text-gray-700">45 calories</p>
               <div className="flex items-center gap-8">
                 <p className="text-lg text-headingColor font-semibold">
                   <span className="text-sm text-red-500">$</span> 5.25
@@ -62,22 +73,26 @@ const RowContainer = ({ flag, data }) => {
           </SwiperSlide>
         ))}
       </div>
-      <div className="hidden md:flex gap-3 items-center justify-center">
+      
+      <div 
+        className="hidden md:flex w-full absolute bottom-0
+        gap-3 items-center justify-center"
+      >
         <motion.div
           whileTap={{ scale: 0.75 }}
-          className="w-8 h-8 rounded-lg bg-orange-300 hover:bg-orange-500 flex items-center justify-center
+          className="w-10 h-10 rounded-full bg-orange-400 hover:bg-orange-500 flex items-center justify-center
           cursor-pointer duration-100 hover:shadow-lg"
           ref={prevRef}
         >
-          <MdChevronLeft className="text-lg text-white" />
+          <MdChevronLeft className="text-2xl text-white" />
         </motion.div>
         <motion.div
           whileTap={{ scale: 0.75 }}
-          className="w-8 h-8 rounded-lg bg-orange-300 hover:bg-orange-500 flex items-center justify-center
+          className="w-10 h-10 rounded-full bg-orange-400 hover:bg-orange-500 flex items-center justify-center
           cursor-pointer duration-100 hover:shadow-lg"
           ref={nextRef}
         >              
-          <MdChevronRight className="text-lg text-white" />              
+          <MdChevronRight className="text-2xl text-white" />              
         </motion.div>
       </div>
     </Swiper>
