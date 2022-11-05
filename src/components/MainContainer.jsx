@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { HomeContainer, RowContainer, MenuContainer, CartContainer } from './index';
 import { useStateValue } from '../context/StateProvider';
 
 const MainContainer = () => {
-  const [{foodItems}, dispatch] = useStateValue();
+  const [{foodItems, cartShow}, dispatch] = useStateValue();
   
+  useEffect(() => {
+    
+  }, [cartShow]);
+
   return (
     <div className="w-full h-auto flex flex-col items-center justify-center">
       <HomeContainer />
@@ -23,7 +27,10 @@ const MainContainer = () => {
       </section>
 
       <MenuContainer />
-      <CartContainer />
+      
+      {cartShow && (
+        <CartContainer />
+      )}
     </div>
   )
 }

@@ -14,7 +14,7 @@ import { actionType } from '../context/reducer';
 const Header = () => {
   const firebaseAuth = getAuth(app);
   const provider = new GoogleAuthProvider();
-  const [{user}, dispatch] = useStateValue();
+  const [{user, cartShow}, dispatch] = useStateValue();
   const [isMenu, setIsMenu] = useState(false);
 
   const login = async () => {
@@ -27,7 +27,7 @@ const Header = () => {
       });
   
       localStorage.setItem('user', JSON.stringify(providerData[0]));
-      console.log(user);
+      //console.log(user);
     }else{
       setIsMenu(!isMenu);
     }
@@ -41,6 +41,14 @@ const Header = () => {
       user: null,
     });
   }
+
+  const showCart = () => {
+    //console.log(cartShow);
+    dispatch({
+      type: actionType.SET_CART_SHOW,
+      cartShow: !cartShow,
+    });
+  };
 
   return (
     <header className="fixed z-50 w-screen p-3 md:p-6 px-4 md:px-16 bg-primary shadow-blue-100 shadow-lg">
@@ -66,7 +74,7 @@ const Header = () => {
               ease-in-out cursor-pointer">Service</li>
           </motion.ul>
 
-          <div className="relative flex items-center justify-center">
+          <div className="relative flex items-center justify-center" onClick={showCart}>
             <MdShoppingBasket className="text-textColor text-2xl cursor-pointer" />
             <div className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-cartNumBg flex items-center justify-center">
               <p className="text-xs text-white font-semibold">2</p>
@@ -110,7 +118,7 @@ const Header = () => {
 
       {/* mobile */}
       <div className="flex items-center justify-between md:hidden h-full w-full">
-        <div className="relative flex items-center justify-center">
+        <div className="relative flex items-center justify-center" onClick={showCart}>
           <MdShoppingBasket className="text-textColor text-2xl cursor-pointer" />
           <div className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-cartNumBg flex items-center justify-center">
             <p className="text-xs text-white font-semibold">2</p>

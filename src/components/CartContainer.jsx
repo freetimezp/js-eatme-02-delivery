@@ -4,13 +4,24 @@ import { MdOutlineKeyboardBackspace } from 'react-icons/md';
 import { RiRefreshFill } from 'react-icons/ri';
 import { BiMinus, BiPlus } from 'react-icons/bi';
 import { motion } from 'framer-motion';
+import { useStateValue } from '../context/StateProvider';
+import { actionType } from '../context/reducer';
 
 const CartContainer = () => {
+  const [{cartShow}, dispatch] = useStateValue();
+
+  const showCart = () => {
+    dispatch({
+      type: actionType.SET_CART_SHOW,
+      cartShow: !cartShow,
+    });
+  };
+
   return (
     <div className="fixed top-0 right-0 w-full md:w-375 h-screen bg-white flex 
       flex-col z-[101]">
       <div className="w-full flex items-center justify-between p-4 cursor-pointer">
-        <motion.div whileTap={{ scale: 0.75 }}>
+        <motion.div whileTap={{ scale: 0.75 }} onClick={showCart}>
           <MdOutlineKeyboardBackspace className="text-textColor text-3xl" />
         </motion.div>
         <p className="text-textColor text-lg font-semibold">Cart</p>
@@ -111,7 +122,8 @@ const CartContainer = () => {
         </div>
 
         {/*cart total*/}
-        <div class="w-full flex-1 bg-cartTotal rounded-t-[2rem] flex flex-col items-center justify-evenly px-8 py-2">
+        <div className="w-full flex-1 bg-cartTotal rounded-t-[2rem] flex flex-col items-center justify-evenly 
+          px-8 py-2">
           <div className="w-full flex items-center justify-between">
             <p className="text-gray-400 text-lg">Sub Total</p>
             <p className="text-gray-400 text-lg">$ 6.2</p>
@@ -129,8 +141,8 @@ const CartContainer = () => {
           </div>
 
           <motion.button whileTap={{ scale: 0.8 }} type="button"
-            className="w-full p-2 rounded-full bg-orange-600 text-gray-50 text-lg my-2 hover:bg-orange-700
-            transition-all duration-150 ease-out">
+            className="w-full p-2 rounded-full bg-gradient-to-r from-orange-400 to-orange-500 text-gray-50 
+            text-lg my-2 hover:bg-orange-700 hover:bg-gradient-to-l transition-all duration-150 ease-out">
             Check Out
           </motion.button>
         </div>

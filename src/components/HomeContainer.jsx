@@ -41,8 +41,8 @@ const HomeContainer = () => {
       <div className="py-2 flex-1 flex items-center relative">
         <img src={HeroBg} alt="home" className="h-420 lg:h-650 w-full lg:w-auto ml-auto" />
 
-        <div className="w-full h-full absolute top-0 left-0 flex items-center justify-center py-4 lg:px-32
-          gap-x-2 lg:gap-x-[2.75rem] flex-wrap"
+        <div className="w-full h-full absolute top-0 left-0 flex items-center justify-center py-4 
+        gap-2 px-[1rem] flex-wrap"
         >
           {heroData && heroData.map((n) => (
             <div 
