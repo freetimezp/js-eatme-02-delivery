@@ -42,7 +42,7 @@ const HomeContainer = () => {
         <img src={HeroBg} alt="home" className="h-420 lg:h-650 w-full lg:w-auto ml-auto" />
 
         <div className="w-full h-full absolute top-0 left-0 flex items-center justify-center py-4 
-        gap-2 px-[1rem] flex-wrap"
+        gap-2 lg:px-[1rem] flex-wrap"
         >
           {heroData && heroData.map((n) => (
             <div 
