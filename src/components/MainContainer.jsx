@@ -7,7 +7,7 @@ const MainContainer = () => {
   const [{foodItems, cartShow}, dispatch] = useStateValue();
   
   useEffect(() => {
-    
+    //console.log(cartShow);
   }, [cartShow]);
 
   return (
